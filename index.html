@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang Đăng Nhập</title>
+
+  <!-- Thêm Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Thêm thư viện Simple Notify -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css">
+  <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: url('https://i.imgur.com/xoUefjV.jpeg') no-repeat center center/cover;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+      padding: 40px;
+      background: #fff; 
+      border-radius: 25px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .login-container:hover {
+      transform: scale(1.05);
+    }
+
+    .login-container h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      font-weight: 600;
+      color: #333;
+      text-transform: uppercase;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      font-size: 16px;
+      color: #333;
+      outline: none;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    .login-container input:focus {
+      border-color: #007BFF;
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #007BFF, #0056b3);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .login-container button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .login-container button:active {
+      transform: scale(0.98);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-container p {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .login-container p a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .login-container p a:hover {
+      text-decoration: underline;
+    }
+
+    .login-container .forgot-password {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .login-container .forgot-password:hover {
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Đăng nhập tài khoản</h2>
+    <form id="loginForm">
+      <div class="mb-4">
+        <label class="block text-gray-700">Tài khoản</label>
+        <input type="text" id="username" placeholder="Username" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700">Mật khẩu</label>
+        <input type="password" id="password" placeholder="Password" required>
+      </div>
+
+      <button type="submit">Đăng nhập</button>
+    </form>
+
+    <p class="text-center mt-4">Bạn chưa có tài khoản? <a href="/dang-ky">Đăng ký ngay</a></p>
+    <a href="/quen-mat-khau" class="forgot-password">Quên mật khẩu?</a>
+  </div>
+
+  <script>
+    
+    function showMessage(message, type) {
+      const commonOptions = {
+        effect: 'fade',
+        speed: 300,
+        customClass: null,
+        customIcon: null,
+        showIcon: true,
+        showCloseButton: true,
+        autoclose: true,
+        autotimeout: 3000,
+        gap: 20,
+        distance: 20,
+        type: 'outline',
+        position: 'right top'
+      };
+
+      const options = {
+        success: {
+          status: 'success',
+          title: 'Thành công!',
+          text: message,
+        },
+        error: {
+          status: 'error',
+          title: 'Thất bại!',
+          text: message,
+        }
+      };
+      new Notify(Object.assign({}, commonOptions, options[type]));
+    }
+
+    // Kiểm tra đăng nhập khi người dùng nhấn nút "Đăng nhập"
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Kiểm tra tài khoản và mật khẩu (ví dụ: tài khoản là "user", mật khẩu là "1234")
+      if (username === "Tuandev" && password === "1234") {
+        showMessage("Đăng nhập thành công!", 'success');
+      } else {
+        showMessage("Sai tài khoản hoặc mật khẩu!", 'error');
+      }
+    });
+
+    // Chặn các phím F12 và chuột phải
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'F12' || event.keyCode === 123) {
+        event.preventDefault();
+        showMessage('f12 là 1 cái tội ác rất nặng nên đừng f12 chi tốn thời gian', 'error');
+      }
+    });
+
+    document.addEventListener('contextmenu', function(event) {
+      event.preventDefault();
+      showMessage('copy là 1 tội ác hãy đừng copy nhé bạn', 'error');
+    });
+  </script>
+
+</body>
+</html>
+
+
+<style>
+	html,body{cursor:url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjac-SGqqBNOf8R-yQBGf8rXc_3Mko7Jk_Vf-3mtmVeE3EiU4oaRG-3lS1CqQ5XgWXpBspTaSriDXGF73L3m9V0c0K07iDq1r7XyLXpsEqU3VF2O6mT-gZkqsJimuxi8gLvOQtxhGXx8Y9a/s0/mouse-f1.png"), auto;}
+	a:hover{cursor:url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjITCvg05WrPmBtw3wfCNDButQe1JVWYCtbJ07WNQ1Q_72Sf0PTOXRzt9H8OqryPkJrC7GmiHUJ0CwHje_VLV2Trr9cumn0Y6eMcFL77Z9fm4G4I3ZwLHu8I8kDUy9rkXjzH_v49SscqVYT/s0/mouse-f2.png"), auto;}
+</style>
+
+
